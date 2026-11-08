@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zerotoken-mcp"
+version = "0.1.0"
+description = "A local, zero-token semantic code graph served over MCP (tree-sitter + SQLite FTS5)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["mcp", "model-context-protocol", "tree-sitter", "code-search", "ai-agents", "sqlite"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Software Development :: Libraries",
+]
+dependencies = [
+    "mcp[cli]>=1.0.0",
+    "tree-sitter>=0.22.0",
+    "tree-sitter-python>=0.21.0",
+    "tree-sitter-javascript>=0.21.0",
+    # TypeScript/TSX need their own grammar; tree-sitter-javascript cannot parse them.
+    "tree-sitter-typescript>=0.21.0",
+    "watchdog>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+zerotoken = "zerotoken.cli:main"
+
+[tool.setuptools]
+packages = ["zerotoken"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
